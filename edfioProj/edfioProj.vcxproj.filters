@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="edfio">
+      <UniqueIdentifier>{843a1c6b-2e5e-47b1-9526-dd0e27e61380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\core">
+      <UniqueIdentifier>{8a6d7ee0-16ed-4148-9321-ee71330ebda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\header">
+      <UniqueIdentifier>{da9cfbd2-85b9-493c-850e-b0ace1f00682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\processor">
+      <UniqueIdentifier>{f24bfa7c-f925-4e6a-81ff-8db51d142ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\reader">
+      <UniqueIdentifier>{a2c03181-dff8-4182-bb99-8965c1c4143d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\writer">
+      <UniqueIdentifier>{bb944b02-82b0-47a6-9c6b-0606e7dc6476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\reader\impl">
+      <UniqueIdentifier>{059314a9-aeee-40b9-a3ed-2caaeda5794d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\processor\detail">
+      <UniqueIdentifier>{851d5d77-2308-4ded-a1c9-7a7c19abe4af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\processor\impl">
+      <UniqueIdentifier>{469ebd5a-9b44-4393-b7c1-82caa6c65665}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\edfio\include\edfio\Defs.hpp">
+      <Filter>edfio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\EdfIO.hpp">
+      <Filter>edfio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\core\Annotation.hpp">
+      <Filter>edfio\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\core\DataFormat.hpp">
+      <Filter>edfio\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\core\Field.hpp">
+      <Filter>edfio\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\core\Record.hpp">
+      <Filter>edfio\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\core\Streamer.hpp">
+      <Filter>edfio\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\header\HeaderExam.hpp">
+      <Filter>edfio\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\header\HeaderGeneral.hpp">
+      <Filter>edfio\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\header\HeaderSignal.hpp">
+      <Filter>edfio\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderHeader.hpp">
+      <Filter>edfio\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderRecord.hpp">
+      <Filter>edfio\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorAnnotationRecord.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorBase.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorDataRecord.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderExam.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderGeneral.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderSignal.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorSignalRecord.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\detail\ProcessorUtils.hpp">
+      <Filter>edfio\processor\detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\edfio\include\edfio\reader\impl\ReaderHeader.ipp">
+      <Filter>edfio\reader\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\reader\impl\ReaderRecord.ipp">
+      <Filter>edfio\reader\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorDataRecord.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderExam.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderGeneral.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderSignal.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorSignalRecord.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+  </ItemGroup>
+</Project>
