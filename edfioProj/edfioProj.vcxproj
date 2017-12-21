@@ -137,8 +137,11 @@
     <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorSignalRecord.hpp" />
     <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderHeader.hpp" />
     <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderRecord.hpp" />
+    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterHeader.hpp" />
+    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterRecord.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorAnnotationRecord.ipp" />
     <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorDataRecord.ipp" />
     <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderExam.ipp" />
     <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderGeneral.ipp" />
@@ -146,6 +149,8 @@
     <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorSignalRecord.ipp" />
     <None Include="..\..\edfio\include\edfio\reader\impl\ReaderHeader.ipp" />
     <None Include="..\..\edfio\include\edfio\reader\impl\ReaderRecord.ipp" />
+    <None Include="..\..\edfio\include\edfio\writer\impl\WriterHeader.ipp" />
+    <None Include="..\..\edfio\include\edfio\writer\impl\WriterRecord.ipp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

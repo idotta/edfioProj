@@ -32,6 +32,9 @@
     <Filter Include="edfio\processor\impl">
       <UniqueIdentifier>{469ebd5a-9b44-4393-b7c1-82caa6c65665}</UniqueIdentifier>
     </Filter>
+    <Filter Include="edfio\writer\impl">
+      <UniqueIdentifier>{18195841-170d-4877-9ece-29f3ae36531c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,6 +102,12 @@
     <ClInclude Include="..\..\edfio\include\edfio\processor\detail\ProcessorUtils.hpp">
       <Filter>edfio\processor\detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterHeader.hpp">
+      <Filter>edfio\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterRecord.hpp">
+      <Filter>edfio\writer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\edfio\include\edfio\reader\impl\ReaderHeader.ipp">
@@ -120,6 +129,15 @@
       <Filter>edfio\processor\impl</Filter>
     </None>
     <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorSignalRecord.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\writer\impl\WriterHeader.ipp">
+      <Filter>edfio\writer\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\writer\impl\WriterRecord.ipp">
+      <Filter>edfio\writer\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorAnnotationRecord.ipp">
       <Filter>edfio\processor\impl</Filter>
     </None>
   </ItemGroup>
