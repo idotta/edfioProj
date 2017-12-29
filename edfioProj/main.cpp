@@ -93,6 +93,9 @@ int main()
 	std::ofstream os("../sample/test.edf", std::ios::binary);
 	
 	// Process general fields
+
+	// Test to rewrite header later
+	header.m_general.m_datarecordsFile = 0;
 	generalFields = std::move(processorGeneral >> header.m_general);
 	// Write general fields
 	WriterHeaderGeneral writerGeneral;
@@ -111,13 +114,13 @@ int main()
 	{
 		if (!header.m_signals[idx].m_detail.m_isAnnotation)
 		{
-			ProcessorSignalRecord<SampleType::Digital> procDigital(header.m_signals[idx], header.m_general.m_version);
-			auto digital = std::move(procDigital >> digitalData[idxSignal++]);
-			signalRecordFields.emplace_back(std::move(digital));
+			/*ProcessorSignalRecord<SampleType::Digital> procDigital(header.m_signals[idx], header.m_general.m_version);
+			auto samples = std::move(procDigital >> digitalData[idxSignal++]);
+			signalRecordFields.emplace_back(std::move(samples));*/
 
-			/*ProcessorSignalRecord<SampleType::Physical> procPhysical(header.m_signals[idx], header.m_general.m_version);
-			auto physical = std::move(procPhysical >> physicalData[idx]);
-			physicalData.emplace_back(std::move(physical));*/
+			ProcessorSignalRecord<SampleType::Physical> procPhysical(header.m_signals[idx], header.m_general.m_version);
+			auto samples = std::move(procPhysical >> physicalData[idxSignal++]);
+			signalRecordFields.emplace_back(std::move(samples));
 		}
 		else
 		{
@@ -134,6 +137,11 @@ int main()
 	{
 		writerDataRecord(os, r);
 	}
+
+	// Test to rewrite header
+	header.m_general.m_datarecordsFile = 1;
+	generalFields = std::move(processorGeneral >> header.m_general);
+	writerGeneral(os, generalFields);
 
 	return 0;
 }
