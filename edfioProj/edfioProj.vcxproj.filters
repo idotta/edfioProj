@@ -11,9 +11,6 @@
     <Filter Include="edfio\core">
       <UniqueIdentifier>{8a6d7ee0-16ed-4148-9321-ee71330ebda7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="edfio\header">
-      <UniqueIdentifier>{da9cfbd2-85b9-493c-850e-b0ace1f00682}</UniqueIdentifier>
-    </Filter>
     <Filter Include="edfio\processor">
       <UniqueIdentifier>{f24bfa7c-f925-4e6a-81ff-8db51d142ad1}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,15 @@
     </Filter>
     <Filter Include="edfio\writer\impl">
       <UniqueIdentifier>{18195841-170d-4877-9ece-29f3ae36531c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\header">
+      <UniqueIdentifier>{baeee433-c6d4-4e34-ad31-a797160d35b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\store">
+      <UniqueIdentifier>{f9c528db-122f-4353-877d-a40fb1290f4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\store\detail">
+      <UniqueIdentifier>{177985bd-29e4-49fe-8689-91790cc84567}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +66,22 @@
     <ClInclude Include="..\..\edfio\include\edfio\core\Record.hpp">
       <Filter>edfio\core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\core\Streamer.hpp">
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderGeneral.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderSignal.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\detail\ProcessorUtils.hpp">
+      <Filter>edfio\processor\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderHeaderGeneral.hpp">
+      <Filter>edfio\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderHeaderSignal.hpp">
+      <Filter>edfio\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\core\StreamIO.hpp">
       <Filter>edfio\core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\edfio\include\edfio\header\HeaderExam.hpp">
@@ -72,72 +93,102 @@
     <ClInclude Include="..\..\edfio\include\edfio\header\HeaderSignal.hpp">
       <Filter>edfio\header</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderHeader.hpp">
+    <ClInclude Include="..\..\edfio\include\edfio\Utils.hpp">
+      <Filter>edfio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\header\HeaderUtils.hpp">
+      <Filter>edfio\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderGeneralFields.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderSignalFields.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderHeaderExam.hpp">
       <Filter>edfio\reader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\reader\ReaderRecord.hpp">
-      <Filter>edfio\reader</Filter>
+    <ClInclude Include="..\..\edfio\include\edfio\store\Store.hpp">
+      <Filter>edfio\store</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorAnnotationRecord.hpp">
+    <ClInclude Include="..\..\edfio\include\edfio\store\RecordStore.hpp">
+      <Filter>edfio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\store\SignalSampleStore.hpp">
+      <Filter>edfio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\store\detail\StoreUtils.hpp">
+      <Filter>edfio\store\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\store\TimeStampStore.hpp">
+      <Filter>edfio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorTimeStampRecord.hpp">
       <Filter>edfio\processor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorBase.hpp">
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorSampleRecord.hpp">
       <Filter>edfio\processor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorDataRecord.hpp">
+    <ClInclude Include="..\..\edfio\include\edfio\store\DataRecordStore.hpp">
+      <Filter>edfio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\store\SignalRecordStore.hpp">
+      <Filter>edfio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\store\TalStore.hpp">
+      <Filter>edfio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorTal.hpp">
       <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterHeaderGeneral.hpp">
+      <Filter>edfio\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterHeaderSignals.hpp">
+      <Filter>edfio\writer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderExam.hpp">
       <Filter>edfio\processor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderGeneral.hpp">
-      <Filter>edfio\processor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorHeaderSignal.hpp">
-      <Filter>edfio\processor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\processor\ProcessorSignalRecord.hpp">
-      <Filter>edfio\processor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\processor\detail\ProcessorUtils.hpp">
-      <Filter>edfio\processor\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterHeader.hpp">
-      <Filter>edfio\writer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\edfio\include\edfio\writer\WriterRecord.hpp">
-      <Filter>edfio\writer</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\edfio\include\edfio\reader\impl\ReaderHeader.ipp">
-      <Filter>edfio\reader\impl</Filter>
-    </None>
-    <None Include="..\..\edfio\include\edfio\reader\impl\ReaderRecord.ipp">
-      <Filter>edfio\reader\impl</Filter>
-    </None>
-    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorDataRecord.ipp">
-      <Filter>edfio\processor\impl</Filter>
-    </None>
-    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderExam.ipp">
-      <Filter>edfio\processor\impl</Filter>
-    </None>
     <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderGeneral.ipp">
       <Filter>edfio\processor\impl</Filter>
     </None>
     <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderSignal.ipp">
       <Filter>edfio\processor\impl</Filter>
     </None>
-    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorSignalRecord.ipp">
+    <None Include="..\..\edfio\include\edfio\reader\impl\ReaderHeaderGeneral.ipp">
+      <Filter>edfio\reader\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\reader\impl\ReaderHeaderSignal.ipp">
+      <Filter>edfio\reader\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderGeneralFields.ipp">
       <Filter>edfio\processor\impl</Filter>
     </None>
-    <None Include="..\..\edfio\include\edfio\writer\impl\WriterHeader.ipp">
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderSignalFields.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\reader\impl\ReaderHeaderExam.ipp">
+      <Filter>edfio\reader\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorSampleRecord.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorTimeStampRecord.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorTal.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\edfio\include\edfio\writer\impl\WriterHeaderSignals.ipp">
       <Filter>edfio\writer\impl</Filter>
     </None>
-    <None Include="..\..\edfio\include\edfio\writer\impl\WriterRecord.ipp">
+    <None Include="..\..\edfio\include\edfio\writer\impl\WriterHeaderGeneral.ipp">
       <Filter>edfio\writer\impl</Filter>
     </None>
-    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorAnnotationRecord.ipp">
+    <None Include="..\..\edfio\include\edfio\processor\impl\ProcessorHeaderExam.ipp">
       <Filter>edfio\processor\impl</Filter>
     </None>
   </ItemGroup>

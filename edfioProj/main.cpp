@@ -8,21 +8,21 @@
 //
 
 #include <edfio/header/HeaderExam.hpp>
-#include <edfio/core/Record.hpp>
-#include <edfio/reader/ReaderHeader.hpp>
-#include <edfio/reader/ReaderRecord.hpp>
-#include <edfio/processor/ProcessorHeaderGeneral.hpp>
-#include <edfio/processor/ProcessorHeaderSignal.hpp>
-#include <edfio/processor/ProcessorHeaderExam.hpp>
-#include <edfio/processor/ProcessorDataRecord.hpp>
-#include <edfio/processor/ProcessorSignalRecord.hpp>
-#include <edfio/processor/ProcessorAnnotationRecord.hpp>
+#include <edfio/reader/ReaderHeaderExam.hpp>
 
-#include <edfio/writer/WriterHeader.hpp>
-#include <edfio/writer/WriterRecord.hpp>
+#include <edfio/store/DataRecordStore.hpp>
+#include <edfio/store/SignalRecordStore.hpp>
+#include <edfio/store/SignalSampleStore.hpp>
+#include <edfio/store/detail/StoreUtils.hpp>
+#include <edfio/store/TalStore.hpp>
+#include <edfio/store/TimeStampStore.hpp>
+
+#include <edfio/processor/ProcessorSampleRecord.hpp>
+#include <edfio/processor/ProcessorTimeStampRecord.hpp>
+#include <edfio/processor/ProcessorTal.hpp>
 
 #include <fstream>
-#include <iterator>
+#include <chrono>
 
 int main()
 {
@@ -33,115 +33,76 @@ int main()
 	if (!is)
 		return -1;
 
-	HeaderExam header;
+	std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-	// Read general fields
-	ReaderHeaderGeneral readerGeneral;
-	auto generalFields = readerGeneral(is);
-	// Process general fields
-	ProcessorHeaderGeneral processorGeneral;
-	header.m_general = processorGeneral << std::move(generalFields);
-	//header.m_general = processorGeneral << generalFields;
+	auto header = std::move(ReaderHeaderExam{}(is));
 
-	// Read signal fields
-	ReaderHeaderSignal readerSignals(header.m_general.m_totalSignals);
-	auto signalFields = readerSignals(is);
-	// Process signal fields
-	ProcessorHeaderSignal processorSignals(header.m_general);
-	header.m_signals = processorSignals << std::move(signalFields);
-	//header.m_signals = processorSignals << signalFields;
-
-	// Process exam header
-	ProcessorHeaderExam processorExam(is);
-	header = processorExam << std::move(header);
-
-	is.seekg(header.m_general.m_headerSize, is.beg);
-
-	// Read one data record (Calib5.edf only has one data record)
-	size_t sz = header.m_general.m_detail.m_recordSize;
-	ReaderRecord readerDataRecord(sz);
-	auto recordField = readerDataRecord(is);
-	// Process data record
-	ProcessorDataRecord procDataRecord(header.m_signals, header.m_general.m_version);
-	auto signalRecordFields = procDataRecord << recordField;
-
-	// Process signal records
-	std::vector<std::vector<int>> digitalData;
-	std::vector<std::vector<double>> physicalData;
-	std::vector<std::vector<Annotation>> annotationsData;
-	for (size_t idx = 0; idx < signalRecordFields.size(); idx++)
+	// DataRecordStore
+	auto drs = std::move(detail::CreateDataRecordStore(is, header.m_general));
+	for (auto dr : drs)
 	{
-		if (!header.m_signals[idx].m_detail.m_isAnnotation)
-		{
-			ProcessorSignalRecord<SampleType::Digital> procDigital(header.m_signals[idx], header.m_general.m_version);
-			auto digital = std::move(procDigital << signalRecordFields[idx]);
-			digitalData.emplace_back(std::move(digital));
-
-			ProcessorSignalRecord<SampleType::Physical> procPhysical(header.m_signals[idx], header.m_general.m_version);
-			auto physical = std::move(procPhysical << signalRecordFields[idx]);
-			physicalData.emplace_back(std::move(physical));
-		}
-		else
-		{
-			ProcessorAnnotationRecord procAnnot;
-			auto annotations = std::move(procAnnot << signalRecordFields[idx]);
-			annotationsData.emplace_back(std::move(annotations));
-		}
-
+		auto data(dr);
 	}
 
-	std::ofstream os("../sample/test.edf", std::ios::binary);
-	
-	// Process general fields
-
-	// Test to rewrite header later
-	header.m_general.m_datarecordsFile = 0;
-	generalFields = std::move(processorGeneral >> header.m_general);
-	// Write general fields
-	WriterHeaderGeneral writerGeneral;
-	writerGeneral(os, generalFields);
-	
-	// Process signal fields
-	signalFields = std::move(processorSignals >> header.m_signals);
-	// Write signal fields
-	WriterHeaderSignal writerSignals;
-	writerSignals(os, signalFields);
-
-	// Process signal records
-	signalRecordFields.clear();
-	size_t idxSignal = 0, idxAnnotation = 0;
-	for (size_t idx = 0; idx < header.m_signals.size(); idx++)
+	for (auto signal : header.m_signals)
 	{
-		if (!header.m_signals[idx].m_detail.m_isAnnotation)
+		if (!signal.m_detail.m_isAnnotation)
 		{
-			/*ProcessorSignalRecord<SampleType::Digital> procDigital(header.m_signals[idx], header.m_general.m_version);
-			auto samples = std::move(procDigital >> digitalData[idxSignal++]);
-			signalRecordFields.emplace_back(std::move(samples));*/
+			// SignalRecordStore
+			auto srs = std::move(detail::CreateSignalRecordStore(is, header.m_general, signal));
+			for (auto sr : srs)
+			{
+				auto data(sr);
+			}
 
-			ProcessorSignalRecord<SampleType::Physical> procPhysical(header.m_signals[idx], header.m_general.m_version);
-			auto samples = std::move(procPhysical >> physicalData[idxSignal++]);
-			signalRecordFields.emplace_back(std::move(samples));
+			// SignalSampleStore
+			auto sss = std::move(detail::CreateSignalSampleStore(is, header.m_general, signal));
+			ProcessorSampleRecord<SampleType::Physical> procSamplePhys(signal.m_detail.m_offset, signal.m_detail.m_scaling);
+			for (auto &sr : sss)
+			{
+				auto data = std::move(procSamplePhys(sr));
+			}
 		}
-		else
+		else // only 1 annotation signal in this exam, if there are more, the timestamp is on the 1st EDF Annotations signal
 		{
-			ProcessorAnnotationRecord procAnnot(header.m_signals[idx].m_samplesInDataRecord * edfio::GetSampleBytes(header.m_general.m_version));
-			//auto annotations = std::move(procAnnot << signalRecordFields[idx]);
-			auto annotations = std::move(procAnnot >> annotationsData[idxAnnotation++]);
-			signalRecordFields.emplace_back(std::move(annotations));
+			// TimeStampStore
+			auto tss = detail::CreateTimeStampStore(is, header.m_general, signal);
+			long long datarecord = 0;
+			ProcessorTimeStampRecord procTimestamp;
+			for (auto ts : tss)
+			{
+				auto data = procTimestamp(ts, datarecord++);
+				int a = 0;
+			}
+
+			// SignalRecordStore && TalStore
+			auto srs = std::move(detail::CreateSignalRecordStore(is, header.m_general, signal));
+			datarecord = 0;
+			ProcessorTal procTal;
+			for (auto itSr = srs.begin(); itSr != srs.end(); itSr++)
+			{
+				//auto talStream = *itSr;
+				TalStore tals(*itSr);
+				for (auto tal : tals)
+				{
+					auto annotations = std::move(procTal(tal, datarecord));
+					for (auto &annot : annotations)
+					{
+						//std::cout << annot.m_dararecord << " | " << annot.m_start << " | " << annot.m_duration << " | " << annot.m_annotation << std::endl;
+					}
+				}
+				datarecord++;
+			}
 		}
 	}
-	// Write data record
-	WriterRecord writerDataRecord(sz);
-	//writerDataRecord(os, recordField);
-	for (auto &r : signalRecordFields)
-	{
-		writerDataRecord(os, r);
-	}
 
-	// Test to rewrite header
-	header.m_general.m_datarecordsFile = 1;
-	generalFields = std::move(processorGeneral >> header.m_general);
-	writerGeneral(os, generalFields);
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+	std::cout << "Processing whole file through Datarecords, Signalrecords, Samples and Timestamps took "
+		<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+		<< " ms.\n";
+
+	getchar();
 
 	return 0;
 }
