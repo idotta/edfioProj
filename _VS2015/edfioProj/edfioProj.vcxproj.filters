@@ -138,9 +138,6 @@
     <ClInclude Include="..\..\..\edfio\include\edfio\store\TalStore.hpp">
       <Filter>edfio\store</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\edfio\include\edfio\processor\ProcessorTal.hpp">
-      <Filter>edfio\processor</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\edfio\include\edfio\writer\WriterHeaderGeneral.hpp">
       <Filter>edfio\writer</Filter>
     </ClInclude>
@@ -148,6 +145,21 @@
       <Filter>edfio\writer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\edfio\include\edfio\processor\ProcessorHeaderExam.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\processor\ProcessorTalRecord.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\core\SampleType.hpp">
+      <Filter>edfio\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\processor\ProcessorSample.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\processor\ProcessorAnnotation.hpp">
+      <Filter>edfio\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\processor\ProcessorTimeStamp.hpp">
       <Filter>edfio\processor</Filter>
     </ClInclude>
   </ItemGroup>
@@ -179,9 +191,6 @@
     <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorTimeStampRecord.ipp">
       <Filter>edfio\processor\impl</Filter>
     </None>
-    <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorTal.ipp">
-      <Filter>edfio\processor\impl</Filter>
-    </None>
     <None Include="..\..\..\edfio\include\edfio\writer\impl\WriterHeaderSignals.ipp">
       <Filter>edfio\writer\impl</Filter>
     </None>
@@ -189,6 +198,18 @@
       <Filter>edfio\writer\impl</Filter>
     </None>
     <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorHeaderExam.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorTalRecord.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorSample.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorAnnotation.ipp">
+      <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorTimeStamp.ipp">
       <Filter>edfio\processor\impl</Filter>
     </None>
   </ItemGroup>

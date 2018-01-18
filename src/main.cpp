@@ -19,7 +19,10 @@
 
 #include <edfio/processor/ProcessorSampleRecord.hpp>
 #include <edfio/processor/ProcessorTimeStampRecord.hpp>
-#include <edfio/processor/ProcessorTal.hpp>
+#include <edfio/processor/ProcessorTalRecord.hpp>
+#include <edfio/processor/ProcessorAnnotation.hpp>
+#include <edfio/processor/ProcessorTimeStamp.hpp>
+#include <edfio/processor/ProcessorSample.hpp>
 
 #include <fstream>
 #include <chrono>
@@ -57,10 +60,13 @@ int main()
 
 			// SignalSampleStore
 			auto sss = std::move(detail::CreateSignalSampleStore(is, header.m_general, signal));
-			ProcessorSampleRecord<SampleType::Physical> procSamplePhys(signal.m_detail.m_offset, signal.m_detail.m_scaling);
-			for (auto &sr : sss)
+			ProcessorSampleRecord<SampleType::Physical> procSampleRecPhys(signal.m_detail.m_offset, signal.m_detail.m_scaling);
+			ProcessorSample<SampleType::Physical> procSamplePhys(signal.m_detail.m_offset, signal.m_detail.m_scaling, GetSampleBytes(header.m_general.m_version));
+			for (auto sr : sss)
 			{
-				auto data = std::move(procSamplePhys(sr));
+				auto data = procSampleRecPhys(sr);
+				auto rec = procSamplePhys(data);
+				int a = 0;
 			}
 		}
 		else // only 1 annotation signal in this exam, if there are more, the timestamp is on the 1st EDF Annotations signal
@@ -78,7 +84,7 @@ int main()
 			// SignalRecordStore && TalStore
 			auto srs = std::move(detail::CreateSignalRecordStore(is, header.m_general, signal));
 			datarecord = 0;
-			ProcessorTal procTal;
+			ProcessorTalRecord procTal;
 			for (auto itSr = srs.begin(); itSr != srs.end(); itSr++)
 			{
 				//auto talStream = *itSr;
@@ -95,6 +101,22 @@ int main()
 			}
 		}
 	}
+
+	// ProcessorAnnotation
+	Annotation test;
+	test.m_annotation = "My first test";
+	test.m_dararecord = 0;
+	test.m_duration = 10;
+	test.m_start = -101.1;
+	ProcessorAnnotation procAnnotation;
+	auto recAnnotation = procAnnotation(test);
+
+	// ProcessorTimeStamp
+	TimeStamp test2;
+	test2.m_dararecord = 0;
+	test2.m_start = 101.1;
+	ProcessorTimeStamp procTimeStamp;
+	auto recTS = procTimeStamp(test2);
 
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
