@@ -28,7 +28,7 @@ int main()
 {
 	using namespace edfio;
 
-	std::ifstream is("../sample/Calib5.edf", std::ios::binary);
+	std::ifstream is("../../sample/Calib5.edf", std::ios::binary);
 
 	if (!is)
 		return -1;
