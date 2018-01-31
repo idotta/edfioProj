@@ -41,6 +41,12 @@
     <Filter Include="edfio\store\detail">
       <UniqueIdentifier>{177985bd-29e4-49fe-8689-91790cc84567}</UniqueIdentifier>
     </Filter>
+    <Filter Include="edfio\sink">
+      <UniqueIdentifier>{fac222b9-3393-4ed4-bbab-5427fe278b3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edfio\sink\detail">
+      <UniqueIdentifier>{80831cdc-1c5e-4724-b0db-d93f9d93b1fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../src/main.cpp">
@@ -162,6 +168,33 @@
     <ClInclude Include="..\..\..\edfio\include\edfio\processor\ProcessorTimeStamp.hpp">
       <Filter>edfio\processor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\writer\WriterRecord.hpp">
+      <Filter>edfio\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\Config.hpp">
+      <Filter>edfio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\Sink.hpp">
+      <Filter>edfio\sink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\core\Device.hpp">
+      <Filter>edfio\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\DataRecordSink.hpp">
+      <Filter>edfio\sink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\writer\WriterHeaderExam.hpp">
+      <Filter>edfio\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\detail\SinkUtils.hpp">
+      <Filter>edfio\sink\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\SignalRecordSink.hpp">
+      <Filter>edfio\sink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\RecordSink.hpp">
+      <Filter>edfio\sink</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorHeaderGeneral.ipp">
@@ -211,6 +244,12 @@
     </None>
     <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorTimeStamp.ipp">
       <Filter>edfio\processor\impl</Filter>
+    </None>
+    <None Include="..\..\..\edfio\include\edfio\writer\impl\WriterRecord.ipp">
+      <Filter>edfio\writer\impl</Filter>
+    </None>
+    <None Include="..\..\..\edfio\include\edfio\writer\impl\WriterHeaderExam.ipp">
+      <Filter>edfio\writer\impl</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -117,8 +117,10 @@
     <ClCompile Include="../../src/main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\edfio\include\edfio\Config.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\core\Annotation.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\core\DataFormat.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\core\Device.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\core\Field.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\core\Record.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\core\SampleType.hpp" />
@@ -144,6 +146,11 @@
     <ClInclude Include="..\..\..\edfio\include\edfio\reader\ReaderHeaderExam.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\reader\ReaderHeaderGeneral.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\reader\ReaderHeaderSignal.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\DataRecordSink.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\detail\SinkUtils.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\RecordSink.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\SignalRecordSink.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\sink\Sink.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\store\TalStore.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\store\DataRecordStore.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\store\detail\StoreUtils.hpp" />
@@ -153,8 +160,10 @@
     <ClInclude Include="..\..\..\edfio\include\edfio\store\Store.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\store\TimeStampStore.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\Utils.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\writer\WriterHeaderExam.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\writer\WriterHeaderGeneral.hpp" />
     <ClInclude Include="..\..\..\edfio\include\edfio\writer\WriterHeaderSignals.hpp" />
+    <ClInclude Include="..\..\..\edfio\include\edfio\writer\WriterRecord.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\edfio\include\edfio\processor\impl\ProcessorHeaderExam.ipp" />
@@ -171,8 +180,10 @@
     <None Include="..\..\..\edfio\include\edfio\reader\impl\ReaderHeaderExam.ipp" />
     <None Include="..\..\..\edfio\include\edfio\reader\impl\ReaderHeaderGeneral.ipp" />
     <None Include="..\..\..\edfio\include\edfio\reader\impl\ReaderHeaderSignal.ipp" />
+    <None Include="..\..\..\edfio\include\edfio\writer\impl\WriterHeaderExam.ipp" />
     <None Include="..\..\..\edfio\include\edfio\writer\impl\WriterHeaderGeneral.ipp" />
     <None Include="..\..\..\edfio\include\edfio\writer\impl\WriterHeaderSignals.ipp" />
+    <None Include="..\..\..\edfio\include\edfio\writer\impl\WriterRecord.ipp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
