@@ -16,7 +16,7 @@ void TestWriting();
 
 int main()
 {
-	//TestReading();
+	TestReading();
 
 	TestWriting();
 
@@ -121,7 +121,7 @@ void TestWriting()
 
 	// DataRecord
 	{
-		std::ofstream os("testDataRecord.edf", std::ios::binary);
+		std::ofstream os("../../sample/testDataRecord.edf", std::ios::binary);
 		if (!os)
 			return;
 
@@ -134,28 +134,44 @@ void TestWriting()
 
 		// DataRecordStore
 		auto store = std::move(detail::CreateDataRecordStore(is, header.m_general));
+
 		auto it = store.begin();
-		oit = *it;
+		auto record(*it);
+		auto &data = record();
+
+		size_t annotOffset = header.m_signals[2].m_detail.m_signalOffset;
+		header.m_general.m_datarecordsFile = 0;
+		auto timestamp = std::move(ProcessorTimeStampRecord{}(Record<char>{data.begin() + annotOffset, data.end()}, 0));
+		Record<char> record2{ data.begin(), data.begin() + annotOffset };
+
+		oit = record;
 		header.m_general.m_datarecordsFile++;
-		oit = *it;
+
+		timestamp.m_start += header.m_general.m_datarecordDuration;
+
+		oit = record2 + ProcessorTimeStamp{}(timestamp);
 		header.m_general.m_datarecordsFile++;
-		oit = *it;
+
+		timestamp.m_start += header.m_general.m_datarecordDuration;
+
+		oit = record2 + ProcessorTimeStamp{}(timestamp);
+		header.m_general.m_datarecordsFile++;
+
 		WriterHeaderExam{}(os, header);
 
-		// Rewrite 2nd datarecord
-		auto data = *it;
-		for (auto x = data().begin(); x != data().end() - data().size()/2; x++)
+		// Mess 1st datarecord up
+		for (auto x = data.begin(); x != data.end() - data.size() / 2; x++)
 			*x = std::rand() % 100;
 		oit -= 3;
-		oit = data;
+		oit = record;
 	}
 
 	// SignalRecord
 	{
-		std::ofstream os("testSignalRecord.edf", std::ios::binary);
+		std::ofstream os("../../sample/testSignalRecord.edf", std::ios::binary);
 		if (!os)
 			return;
-		
+
 		auto header = std::move(ReaderHeaderExam{}(is));
 
 		WriterHeaderExam{}(os, header);
@@ -180,9 +196,19 @@ void TestWriting()
 				auto sink = detail::CreateSignalRecordSink(os, header.m_general, signal);
 				auto oit = sink.end();
 
-				auto it = itStores[idxStore];
-				if (it != stores[idxStore].end())
-					oit = *it;
+				if (signal.m_detail.m_isAnnotation & count > 0)
+				{
+					auto record = *itStores[idxStore];
+					auto timestamp = std::move(ProcessorTimeStampRecord{}(record, count));
+					timestamp.m_start = count * header.m_general.m_datarecordDuration;
+					oit = ProcessorTimeStamp{}(timestamp);
+				}
+				else
+				{
+					auto it = itStores[idxStore];
+					if (it != stores[idxStore].end())
+						oit = *it;
+				}
 
 				idxStore++;
 				idxStore %= stores.size();
