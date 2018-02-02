@@ -1,7 +1,14 @@
 # edfioProj
 
-VisualStudio 2015 solution and Netbeans project to test the edfio library. To run, put the edfio folder in the same directory as this repository.
+VisualStudio 2015 solution and Netbeans project to test the edfio library. 
 
+To run it, put the edfio folder in the same directory as this repository.
+eg:
+
+```
+E:/edf/edfio
+E:/edf/edfioProj
+```
 # edfio
 
 A C++ 11 header-only library to read/write EDF(+)/BDF(+) files.
